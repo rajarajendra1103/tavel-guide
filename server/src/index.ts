@@ -20,6 +20,19 @@ app.use((req, _res, next) => {
 // Mount Scraper API Routes
 app.use('/api', apiRouter);
 
+// Root path friendly message
+app.get('/', (_req, res) => {
+  res.json({ 
+    message: '🚀 Travel Guide API is up and running!', 
+    healthCheck: '/health', 
+    endpoints: {
+      scrape: '/api/scrape',
+      generatePlan: '/api/generate-plan',
+      generatePacking: '/api/generate-packing'
+    } 
+  });
+});
+
 // Health status check
 app.get('/health', (_req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
